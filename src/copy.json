@@ -1,0 +1,146 @@
+{
+    "es": {
+        "header": {
+            "wallet": "WALLET",
+            "services": "SERVICIOS",
+            "contact": "CONTACTO",
+            "language": "EN"
+        },
+        "callToAction": {
+            "title": "CONTÁCTANOS",
+            "text": "Agéndate a una llamada de exploración"
+        },
+        "about1": {
+            "header": "Lleva tu empresa al metaverso y a los nuevos mercados de consumo.",
+            "text": "Construimos tu nueva generación de consumidores a través de estrategias y soluciones NFT & blockchain."
+        },
+        "about2": {
+            "header": "Creemos en el poder de la comunidad.",
+            "text": "Construimos estrategias empresariales Web3.0 y colecciones NFT que atraen, retienen y capitalizan nuevas audiencias para nuestros clientes."
+        },
+        "about3": {
+            "header": "En el metaverso hay espacio para todos.",
+            "text": "En nuestra experiencia de más de 14 años como banca de inversión, hemos ayudado a las empresas más grandes del país a potenciar sus finanzas. Ahora, con la misma transparencia y confianza, conectamos el Metaverso y la Web3.0 a tu empresa a través de la tecnología blockchain y los NFTs."
+        },
+        "services": {
+            "header":"SERVICIOS Y ÁREAS DE DESARROLLO",
+            "section1": {
+                "title": "ESTRATEGIA EMPRESARIAL WEB3.0",
+                "texts": [
+                    "Marketing Strategies Web3.0",
+                    "Aliados estratégicos",
+                    "Sponsoring Web3.0",
+                    "Simulaciones Financieras",
+                    "Eventos Interactivos"
+                ]
+            },
+            "section2": {
+                "title": "DESARROLLO CREATIVO",
+                "texts": [
+                    "Colecciones NFT",
+                    "3D Animation & Graphic Design",
+                    "Motion Graphics",
+                    "Web3.0 Branding & Storyboards",
+                    "Gamification"
+                ]
+            },
+            "section3": {
+                "title": "DESARROLLO WEB",
+                "texts": [
+                    "Dapp Development",
+                    "NFTs & Smart Contracts",
+                    "Marketplaces",
+                    "Tokenization",
+                    "Wallets"
+                ]
+            }
+        },
+        "mint": {
+            "title": "ÚNETE A NUESTRA COMUNIDAD DE CLIENTES",
+            "header": "El MGLPass, es nuestro NFT de acceso. Te dará beneficios como:",
+            "texts": [
+                "Estudio empresarial & Estrategia Web3.0",
+                "Acceso a grupo directo con nuestro equipo",
+                "Acceso a información actualizada de la industria Web3.0",
+                "Primer coleccionable NFT MGL"
+            ],
+            "cta": "MINT NOW"
+        },
+        "contact": {
+            "title": "PÓNTE EN CONTACTO",
+            "header": "AGÉNDATE A UNA LLAMADA DE EXPLORACIÓN"
+        }
+    },
+    "en": {
+        "header": {
+            "wallet": "WALLET",
+            "services": "SERVICIOS",
+            "contact": "CONTACT",
+            "language": "ES"
+        },
+        "callToAction": {
+            "title": "SPEAK TO OUR TEAM",
+            "text": "Schedule your FREE audit call"
+        },
+        "about1": {
+            "header": "Take your company to Web3 and the new consumer markets.",
+            "text": "We build your new generation of consumers through NFT & Blockchain solutions."
+        },
+        "about2": {
+            "header": "We believe in the power of community",
+            "text": "We create Web3 marketing campaigns and NFT collections that attract, retain and convert new audiences for our clients."
+        },
+        "about3": {
+            "header": "There ́s room for everybody in here",
+            "text": "In our experience of more than 14 years as an Investment Bank, we have helped the largest companies in the country to multiply their finances. Now, with the same transparency and trust as always, we bring the Metaverse and Web3.0 closer to the business world through NFTs and digital assets."
+        },
+        "services": {
+            "header":"OUR CRAFT & SERVICES",
+            "section1": {
+                "title": "STRATEGIC PLANNING",
+                "texts": [
+                    "Marketing Strategies Web3.0",
+                    "Strategic Allies",
+                    "Web3.0 Sponsoring",
+                    "Finnancial Simmulations",
+                    "Interactive Events"
+                ]
+            },
+            "section2": {
+                "title": "CREATIVE DEPELOPMENT",
+                "texts": [
+                    "NFT Collections",
+                    "3D Animation & Graphic Design",
+                    "Motion Graphics",
+                    "Web3.0 Branding & Storyboards",
+                    "Gamification"
+                ]
+            },
+            "section3": {
+                "title": "WEB DEVELOPMENT",
+                "texts": [
+                    "Dapp Development",
+                    "NFTs & Smart Contracts",
+                    "Marketplaces",
+                    "Tokenization",
+                    "Wallets"
+                ]
+            }
+        },
+        "mint": {
+            "title": "ÚNETE A NUESTRA COMUNIDAD DE CLIENTES",
+            "header": "El MGLPass, es nuestro NFT de acceso. Te dará beneficios como:",
+            "texts": [
+                "Estudio empresarial & Estrategia Web3.0",
+                "Acceso a grupo directo con nuestro equipo",
+                "Acceso a información actualizada de la industria Web3.0",
+                "Primer coleccionable NFT MGL"
+            ],
+            "cta": "MINT NOW"
+        },
+        "contact": {
+            "title": "LETS GET IN TOUCH",
+            "header": "SCHEDULE YOUR FREE AUDIT CALL"
+        }
+    }
+}

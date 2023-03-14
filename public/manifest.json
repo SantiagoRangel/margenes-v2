@@ -1,0 +1,17 @@
+{
+  "short_name": "Margenes Labs",
+  "name": "Margenes Labs",
+  "icons": [
+  
+    {
+      "src": "mgl.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+   
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

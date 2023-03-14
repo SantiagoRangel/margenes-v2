@@ -1,0 +1,40 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	background-color: black;
+}
+section {
+	height: 100vh;
+}
+canvas {
+	/* width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0; */
+	width: 100vw !important;
+	height: 100vh !important;
+	position: fixed;
+}
+/* 
+#root {
+	overflow: auto;
+} */
+
+@font-face {
+	font-family: 'TSKirt';
+	src: local('TSKirt'), url(./fonts/TSKirt-Regular.otf) format('opentype');
+}
+
+body {
+	overflow-x: hidden;
+}
