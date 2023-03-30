@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const MainDiv = styled.section`
@@ -12,7 +11,7 @@ const IconDiv = styled.div`
 	display: flex;
 	justify-content: center;
 	@media only screen and (max-width: 768px) {
-		margin-left: -3rem;
+		padding-left: -3rem;
 	}
 `
 const breatheAnimation = keyframes`

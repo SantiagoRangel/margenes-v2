@@ -1,5 +1,4 @@
 import { useAtom } from 'jotai'
-import React from 'react'
 import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
 import { ServiceContent, ServiceH1, ServiceH2 } from '../../styledComponents/styled-components'
@@ -44,28 +43,30 @@ export default function Services() {
 	const [copy] = useAtom(copyAtom)
 	const [lang] = useAtom(langAtom)
 	return (
-		<MainDiv className='main' id='services-div'>
-			<ServiceH1>{copy[lang].services.header}</ServiceH1>
-			<ServicesContainer>
-				<ServiceDiv>
-					<ServiceH2>{copy[lang].services.section1.title}</ServiceH2>
-					{copy[lang].services.section1.texts.map((text: string) => (
-						<ServiceContent>{text}</ServiceContent>
-					))}
-				</ServiceDiv>
-				<ServiceDiv>
-					<ServiceH2>{copy[lang].services.section2.title}</ServiceH2>
-					{copy[lang].services.section2.texts.map((text: string) => (
-						<ServiceContent>{text}</ServiceContent>
-					))}
-				</ServiceDiv>
-				<ServiceDiv>
-					<ServiceH2>{copy[lang].services.section3.title}</ServiceH2>
-					{copy[lang].services.section3.texts.map((text: string) => (
-						<ServiceContent>{text}</ServiceContent>
-					))}
-				</ServiceDiv>
-			</ServicesContainer>
+		<MainDiv className='main services' id='services-div'>
+			<div className='services-fade'>
+				<ServiceH1>{copy[lang].services.header}</ServiceH1>
+				<ServicesContainer>
+					<ServiceDiv>
+						<ServiceH2>{copy[lang].services.section1.title}</ServiceH2>
+						{copy[lang].services.section1.texts.map((text: string, i: number) => (
+							<ServiceContent key={i}>{text}</ServiceContent>
+						))}
+					</ServiceDiv>
+					<ServiceDiv>
+						<ServiceH2>{copy[lang].services.section2.title}</ServiceH2>
+						{copy[lang].services.section2.texts.map((text: string, i: number) => (
+							<ServiceContent key={i}>{text}</ServiceContent>
+						))}
+					</ServiceDiv>
+					<ServiceDiv>
+						<ServiceH2>{copy[lang].services.section3.title}</ServiceH2>
+						{copy[lang].services.section3.texts.map((text: string, i: number) => (
+							<ServiceContent key={i}>{text}</ServiceContent>
+						))}
+					</ServiceDiv>
+				</ServicesContainer>
+			</div>
 		</MainDiv>
 	)
 }

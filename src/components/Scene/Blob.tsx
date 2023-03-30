@@ -1,10 +1,9 @@
-import { useFrame, useThree } from '@react-three/fiber'
-import { CylinderGeometry, IcosahedronGeometry, Mesh, ShaderMaterial } from 'three'
+import { useFrame } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
+import { IcosahedronGeometry, ShaderMaterial } from 'three'
 
-import { useControls } from 'leva'
-import { useScroll } from '@react-three/drei'
 import gsap from 'gsap'
+import { useControls } from 'leva'
 
 const noise = `
   // GLSL textureless classic 3D noise "cnoise",
@@ -203,7 +202,10 @@ const mapPos = (x: number, in_min: number, in_max: number, out_min: number, out_
 	return ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
 }
 
-export default function Blob({ ...props }) {
+interface blobProps {
+	scroll: any
+}
+export default function Blob({ scroll }: blobProps) {
 	const sphereGeo = new IcosahedronGeometry(2, 64)
 	const [clicked, setClicked] = useState(false)
 	const blobRef = useRef<any>(null!)
@@ -219,14 +221,16 @@ export default function Blob({ ...props }) {
 		}
 	}
 
-	// useEffect(() => {
-	// 	window.addEventListener('mouseup', function (event) {
-	// 		// do logic here
-	// 		if (clicked) {
-	// 			gsap.to(blobRef.current.material.uniforms.uNoiseStrength, { duration: 1, value: 0.2 })
-	// 		}
-	// 	})
-	// }, [])
+	useEffect(() => {
+		// window.addEventListener('scroll', () => {
+		// 	scrollRef.current = window.pageYOffset
+		// })
+		window.addEventListener('mouseup', function (event) {
+			if (clicked) {
+				gsap.to(blobRef.current.material.uniforms.uNoiseStrength, { duration: 1, value: 0.2 })
+			}
+		})
+	}, [])
 	const { uSpeed, uNoiseDensity, uNoiseStrength, uFrequency, uAmplitude, uIntensity, color1, color2, color3 } =
 		useControls('blob shader', {
 			uSpeed: {
@@ -302,18 +306,24 @@ export default function Blob({ ...props }) {
 		fragmentShader,
 	})
 
-	const data = useScroll()
 	useFrame((state, delta) => {
-		// let time = state.clock.elapsedTime
-		// if (blobRef.current.material.uniforms.uTime) blobRef.current.material.uniforms.uTime.value = time
+		let elapsedTime = state.clock.elapsedTime
+		if (blobRef.current.material.uniforms.uTime) blobRef.current.material.uniforms.uTime.value = elapsedTime
+		if (scroll) {
+			if (scroll.current > 0.17 && scroll.current < 0.3333) {
+				// blobRef.current.position.y = lerp(blobRef.current.position.y, -(scroll.current + 0.17) * 150 + 50, 0.9)
+				blobRef.current.position.y = mapPos(scroll.current, 0.166666, 0.333333, 20, 0.5)
+			}
+		}
+
 		// const offset = data.range(0, 1 / 3)
-		// blobRef.current.position.y = 15 * (offset * -1 + 1.02)
+		// blobRef.current.position.y = scroll * 10
 		// const offset2 = data.range(1 / 3, 1 / 3)
 		// blobRef.current.position.x = offset2 * 5
 	})
 	return (
 		<>
-			<group {...props} dispose={null}>
+			<group dispose={null}>
 				<mesh
 					visible={true}
 					onPointerOver={() => {
@@ -342,9 +352,9 @@ export default function Blob({ ...props }) {
 					castShadow
 					receiveShadow
 					material={blobMaterial}
-					position={[-0.3, -1, 0]}
+					position={[6, 15, -6]}
 					rotation={[0, 0, Math.PI]}
-					scale={[1.5, 1.5, 1.5]}
+					scale={2}
 				></mesh>
 			</group>
 		</>

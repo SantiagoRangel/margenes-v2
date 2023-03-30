@@ -1,8 +1,13 @@
 import { useAtom } from 'jotai'
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+// ScrollTrigger.normalizeScroll(true)
 const HeaderDiv = styled.div`
 	padding-top: 10px;
 	font-size: 15pt;
@@ -21,7 +26,7 @@ const Section = styled.div`
 	margin-right: 2rem;
 `
 const DivTitle = styled.a`
-	margin-left: 3rem;
+	padding-left: 3rem;
 	margin-right: 1rem;
 	font-weight: 100;
 	font-family: 'TSKirt';
@@ -35,7 +40,8 @@ const Flexdiv = styled.div`
 	display: flex;
 	justify-content: space-between;
 `
-export default function Header() {
+
+export default function Header({ goToSectionHeader }: { goToSectionHeader: (section: string) => void }) {
 	const [lang, setLang] = useAtom(langAtom)
 	const [copy] = useAtom(copyAtom)
 
@@ -45,7 +51,7 @@ export default function Header() {
 				<div>
 					<DivTitle
 						onClick={() => {
-							document.getElementById('home-div')?.scrollIntoView({ behavior: 'smooth' })
+							goToSectionHeader('home-div')
 						}}
 					>
 						MGL
@@ -54,21 +60,21 @@ export default function Header() {
 				<Section>
 					<DivTitle
 						onClick={() => {
-							document.getElementById('services-div')?.scrollIntoView({ behavior: 'smooth' })
+							goToSectionHeader('services-div')
 						}}
 					>
 						{copy[lang].header.services}
 					</DivTitle>
 					<DivTitle
 						onClick={() => {
-							document.getElementById('mint-div')?.scrollIntoView({ behavior: 'smooth' })
+							goToSectionHeader('mint-div')
 						}}
 					>
 						{copy[lang].header.wallet}
 					</DivTitle>
 					<DivTitle
 						onClick={() => {
-							document.getElementById('contact-div')?.scrollIntoView({ behavior: 'smooth' })
+							goToSectionHeader('contact-div')
 						}}
 					>
 						{copy[lang].header.contact}

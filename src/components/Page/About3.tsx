@@ -1,18 +1,11 @@
 import { useAtom } from 'jotai'
-import React from 'react'
 import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
-import {
-	CallToActionDiv,
-	CallToActionText,
-	CallToActionTitle,
-	PageHeader,
-	PageText,
-} from '../../styledComponents/styled-components'
+import { PageHeader, PageText } from '../../styledComponents/styled-components'
 import CallToAction from './CallToAction'
 
 const MainDiv = styled.section`
-	margin-left: 3rem;
+	padding-left: 3rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -29,15 +22,16 @@ const MainDiv = styled.section`
 		width: 100vw;
 	}
 `
-export default function About2() {
+export default function About3() {
 	const [copy] = useAtom(copyAtom)
 	const [lang] = useAtom(langAtom)
 	return (
-		<MainDiv className='main' id='scroll'>
-			<PageHeader>{copy[lang].about3.header}</PageHeader>
-			<PageText>{copy[lang].about3.text}</PageText>
-
-			<CallToAction />
+		<MainDiv className='main about3' id='about3'>
+			<div className='about3-fade'>
+				<PageHeader>{copy[lang].about3.header}</PageHeader>
+				<PageText>{copy[lang].about3.text}</PageText>
+				<CallToAction />
+			</div>
 		</MainDiv>
 	)
 }

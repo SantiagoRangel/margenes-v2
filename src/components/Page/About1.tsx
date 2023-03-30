@@ -1,20 +1,11 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import Header from './Header'
-import { keyframes } from 'styled-components'
-import {
-	PageHeader,
-	PageText,
-	CallToActionDiv,
-	CallToActionTitle,
-	CallToActionText,
-} from '../../styledComponents/styled-components'
 import { useAtom } from 'jotai'
+import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
+import { PageHeader, PageText } from '../../styledComponents/styled-components'
 import CallToAction from './CallToAction'
 
 const MainDiv = styled.section`
-	margin-left: 3rem;
+	padding-left: 3rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -35,12 +26,13 @@ const MainDiv = styled.section`
 export default function About1() {
 	const [copy] = useAtom(copyAtom)
 	const [lang] = useAtom(langAtom)
-
 	return (
-		<MainDiv className='section'>
-			<PageHeader>{copy[lang].about1.header}</PageHeader>
-			<PageText>{copy[lang].about1.text}</PageText>
-			<CallToAction />
+		<MainDiv className='about1' id='about1'>
+			<div className='about1-fade'>
+				<PageHeader>{copy[lang].about1.header}</PageHeader>
+				<PageText>{copy[lang].about1.text}</PageText>
+				<CallToAction />
+			</div>
 		</MainDiv>
 	)
 }

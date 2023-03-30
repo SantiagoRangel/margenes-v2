@@ -1,5 +1,4 @@
 import { useAtom } from 'jotai'
-import React from 'react'
 import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
 import { MintContent, MintCTA, Minth2, MintHeader } from '../../styledComponents/styled-components'
@@ -25,14 +24,16 @@ export default function MintPage() {
 	const [copy] = useAtom(copyAtom)
 	const [lang] = useAtom(langAtom)
 	return (
-		<MainDiv className='main' id='mint-div'>
-			<MintHeader>ÚNETE A NUESTRA COMUNIDAD DE CLIENTES</MintHeader>
-			<Minth2>El MGLPass, es nuestro NFT de acceso. Te dará beneficios como:</Minth2>
-			<MintContent>Estudio empresarial & Estrategia Web3.0</MintContent>
-			<MintContent>Acceso a grupo directo con nuestro equipo</MintContent>
-			<MintContent>Acceso a información actualizada de la industria Web3.0</MintContent>
-			<MintContent>Primer coleccionable NFT MGL</MintContent>
-			<MintCTA>MINT NOW</MintCTA>
+		<MainDiv className='main mintPage' id='mint-div'>
+			<div className='mintPage-fade'>
+				<MintHeader>{copy[lang].mint.title}</MintHeader>
+				<Minth2>{copy[lang].mint.header}</Minth2>
+				{copy[lang].mint.texts.map((text: string, i: number) => (
+					<MintContent key={i}>{text}</MintContent>
+				))}
+
+				<MintCTA>{copy[lang].mint.cta}</MintCTA>
+			</div>
 		</MainDiv>
 	)
 }

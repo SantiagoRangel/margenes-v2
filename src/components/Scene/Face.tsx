@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useRef } from 'react'
 import { MeshTransmissionMaterial, useGLTF, useScroll } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
-import { AnimationMixer, Mesh } from 'three'
-import * as THREE from 'three'
+import { useThree } from '@react-three/fiber'
 import { useControls } from 'leva'
+import { FC, useRef } from 'react'
+import * as THREE from 'three'
+import { Mesh } from 'three'
 
 interface Props {
 	map: any
@@ -38,7 +38,7 @@ const Face: FC<Props> = ({ map, material }) => {
 	// })
 	const config = useControls('face', {
 		meshPhysicalMaterial: false,
-		transmissionSampler: false,
+		transmissionSampler: true,
 		backside: false,
 		samples: { value: 10, min: 1, max: 32, step: 1 },
 		resolution: { value: 2048, min: 256, max: 2048, step: 256 },

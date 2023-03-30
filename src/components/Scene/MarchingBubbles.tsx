@@ -1,4 +1,4 @@
-import { Color, MathUtils } from 'three'
+import { Color, MathUtils, MeshBasicMaterial, SphereGeometry } from 'three'
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Instances, Instance } from '@react-three/drei'
@@ -30,29 +30,7 @@ const params = {
 export default function MarchingBubbles() {
 	return (
 		<>
-			{/* <color attach='background' args={['#f0f0f0']} /> */}
-			{/* <fog attach='fog' args={['white', 60, 110]} /> */}
-			{/* <pointLight position={[100, 10, -50]} intensity={20} castShadow />
-			<pointLight position={[-100, -100, -100]} intensity={10} color='red' /> */}
 			<Bubbles />
-			{/* <meshPhysicalMaterial
-					metalness={params.metalness}
-					ior={params.ior}
-					roughness={params.roughness}
-					thickness={params.thickness}
-					transmission={params.transmission}
-					specularIntensity={params.specularIntensity}
-					opacity={params.opacity}
-					depthWrite={params.depthWrite}
-				/> */}
-
-			{/* <ContactShadows position={[0, -30, 0]} opacity={0.6} scale={130} blur={1} far={40} />
-			<EffectComposer multisampling={0}>
-				<SSAO samples={31} radius={0.1} intensity={30} luminanceInfluence={0.1} color='red' />
-			</EffectComposer>
-			<Suspense fallback={null}>
-				<Environment preset='city' />
-			</Suspense> */}
 		</>
 	)
 }
@@ -67,30 +45,16 @@ function Bubbles() {
 		}
 	})
 
+	const sphereGeometry = new SphereGeometry(1, 14, 10)
+	const sphereMaterial = new MeshBasicMaterial({ color: '#01b901' })
+
 	return (
-		<Instances limit={particles.length} ref={ref} position={[0, 10, -20]}>
-			{/* <cylinderGeometry args={[0.5, 0.5, 0.4, 64, 64]}></cylinderGeometry> */}
-			<sphereGeometry></sphereGeometry>
-			<meshBasicMaterial color={'#01b901'}></meshBasicMaterial>
-
-			{/* <MeshTransmissionMaterial background={new Color(config.bg)} {...config} /> */}
-			{/* <meshPhysicalMaterial
-				transmission={transmission}
-				clearcoat={clearcoat}
-				clearcoatRoughness={clearcoatRoughness}
-				ior={ior}
-				reflectivity={reflectivity}
-				sheen={sheen}
-				sheenRoughness={sheenRoughness}
-				specularIntensity={specularIntensity}
-				specularColor={specularColor}
-				thickness={thickness}
-				metalness={metalness}
-				roughness={roughness}
-				attenuationColor={attenuationColor}
-				depthWrite={depthWrite}
-			/> */}
-
+		<Instances
+			limit={particles.length}
+			ref={ref}
+			position={[0, 10, -20]}
+			args={[sphereGeometry, sphereMaterial, 15]}
+		>
 			{particles.map((data, i) => (
 				<Bubble key={i} {...data}></Bubble>
 			))}

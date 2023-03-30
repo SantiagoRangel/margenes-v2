@@ -128,13 +128,14 @@
             }
         },
         "mint": {
-            "title": "ÚNETE A NUESTRA COMUNIDAD DE CLIENTES",
-            "header": "El MGLPass, es nuestro NFT de acceso. Te dará beneficios como:",
+            "title": "JOIN OUR CLIENT COMMUNITY",
+            "header": "The MGLPass is our access NFT. It will give you access to resources such as:",
             "texts": [
-                "Estudio empresarial & Estrategia Web3.0",
-                "Acceso a grupo directo con nuestro equipo",
-                "Acceso a información actualizada de la industria Web3.0",
-                "Primer coleccionable NFT MGL"
+                "Web3.0 Training",
+                "Web3.0 Business Study & Web3.0 Strategy",
+                "Direct group access to our team",
+                "Access to up to date Web3.0 industry information",
+                "First NFT MGL collectable"
             ],
             "cta": "MINT NOW"
         },
