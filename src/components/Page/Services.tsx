@@ -15,7 +15,7 @@ const MainDiv = styled.section`
 	width: 100vw;
 	@media only screen and (max-width: 768px) {
 		margin: 0;
-		padding-right: 1rem;
+		padding: 0;
 		width: 100vw;
 	}
 `

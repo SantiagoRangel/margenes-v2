@@ -1,8 +1,8 @@
-import { Color, MathUtils, MeshPhysicalMaterial, SphereGeometry } from 'three'
-import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { Instances, Instance, MeshTransmissionMaterial } from '@react-three/drei'
+import { Instance, Instances } from '@react-three/drei'
+import { useFrame, useLoader } from '@react-three/fiber'
 import { useControls } from 'leva'
+import { useRef } from 'react'
+import { MathUtils, SphereGeometry, Texture, TextureLoader } from 'three'
 
 const particles = Array.from({ length: 15 }, () => ({
 	factor: MathUtils.randInt(20, 100),
@@ -15,29 +15,7 @@ const particles = Array.from({ length: 15 }, () => ({
 export default function MarchingBubblesTransmission() {
 	return (
 		<>
-			{/* <color attach='background' args={['#f0f0f0']} /> */}
-			{/* <fog attach='fog' args={['white', 60, 110]} /> */}
-			{/* <pointLight position={[100, 10, -50]} intensity={20} castShadow />
-			<pointLight position={[-100, -100, -100]} intensity={10} color='red' /> */}
 			<Bubbles />
-			{/* <meshPhysicalMaterial
-					metalness={params.metalness}
-					ior={params.ior}
-					roughness={params.roughness}
-					thickness={params.thickness}
-					transmission={params.transmission}
-					specularIntensity={params.specularIntensity}
-					opacity={params.opacity}
-					depthWrite={params.depthWrite}
-				/> */}
-
-			{/* <ContactShadows position={[0, -30, 0]} opacity={0.6} scale={130} blur={1} far={40} />
-			<EffectComposer multisampling={0}>
-				<SSAO samples={31} radius={0.1} intensity={30} luminanceInfluence={0.1} color='red' />
-			</EffectComposer>
-			<Suspense fallback={null}>
-				<Environment preset='city' />
-			</Suspense> */}
 		</>
 	)
 }
@@ -55,6 +33,7 @@ function Bubbles() {
 		sheenRoughness,
 		specularIntensity,
 		specularColor,
+		sheenColor,
 		thickness,
 		metalness,
 		roughness,
@@ -94,13 +73,13 @@ function Bubbles() {
 			step: 0.1,
 		},
 		ior: {
-			value: 0.6,
-			min: 1,
-			max: 2.3,
+			value: 1.4,
+			min: 0,
+			max: 10,
 			step: 0.1,
 		},
 		reflectivity: {
-			value: 0.5,
+			value: 1.0,
 			min: 0,
 			max: 1,
 			step: 0.1,
@@ -121,18 +100,18 @@ function Bubbles() {
 			value: '#ffffff',
 		},
 		specularIntensity: {
-			value: 0.4,
+			value: 0.5,
 			min: 0,
 			max: 1,
 			step: 0.1,
 		},
 		specularColor: {
-			value: '#ffffff',
+			value: '#00084e',
 		},
 		thickness: {
-			value: 0.9,
+			value: 18,
 			min: 0,
-			max: 20,
+			max: 70,
 			step: 0.1,
 		},
 		envMapIntensity: {
@@ -151,57 +130,11 @@ function Bubbles() {
 			ref.current.rotation.x = MathUtils.damp(ref.current.rotation.x, (-state.mouse.y * Math.PI) / 6, 2.75, delta)
 		}
 	})
-	const config = useControls('bubbles transmission', {
-		backside: false,
-		samples: { value: 6, min: 1, max: 32, step: 1 },
-		resolution: { value: 32, min: 256, max: 2048, step: 256 },
-		transmissionSampler: true,
-
-		transmission: { value: 1, min: 0, max: 1 },
-		roughness: { value: 0.25, min: 0, max: 1, step: 0.01 },
-		thickness: { value: 10, min: 0, max: 10, step: 0.01 },
-		ior: { value: 1.02, min: 1, max: 5, step: 0.01 },
-		chromaticAberration: { value: 1, min: 0, max: 1 },
-		anisotropy: { value: 1.0, min: 0, max: 1, step: 0.01 },
-		distortion: { value: 0.9, min: 0, max: 1, step: 0.01 },
-		distortionScale: { value: 1, min: 0.01, max: 1, step: 0.01 },
-		temporalDistortion: { value: 0.4, min: 0, max: 1, step: 0.01 },
-		attenuationDistance: { value: 0.5, min: 0, max: 10, step: 0.01 },
-		attenuationColor: '#ffffff',
-		color: '#c9ffa1',
-		bg: '#839681',
-	})
-	const sphereGeometry = new SphereGeometry(1, 14, 7)
-	const sphereMaterial = new MeshPhysicalMaterial({
-		transmission: transmission,
-		attenuationColor: new Color(attenuationColor),
-		clearcoat,
-		clearcoatRoughness,
-		ior,
-		reflectivity,
-		sheen,
-		sheenRoughness,
-		specularIntensity,
-		specularColor: new Color(specularColor),
-		// thickness: thickness,
-		metalness,
-		roughness,
-		depthWrite,
-	})
 
 	return (
-		<Instances
-			limit={particles.length}
-			ref={ref}
-			position={[0, 10, -30]}
-			args={[sphereGeometry, sphereMaterial, 15]}
-		>
-			{/* <cylinderGeometry args={[0.5, 0.5, 0.4, 64, 64]}></cylinderGeometry> */}
-			{/* <sphereGeometry></sphereGeometry> */}
-			{/* <meshBasicMaterial color={'#ffffff'}></meshBasicMaterial> */}
-
-			{/* <MeshTransmissionMaterial {...config} /> */}
-			{/* <meshPhysicalMaterial
+		<Instances limit={particles.length} ref={ref} position={[0, 10, -30]}>
+			<sphereGeometry />
+			<meshPhysicalMaterial
 				transmission={transmission}
 				clearcoat={clearcoat}
 				clearcoatRoughness={clearcoatRoughness}
@@ -216,7 +149,7 @@ function Bubbles() {
 				roughness={roughness}
 				attenuationColor={attenuationColor}
 				depthWrite={depthWrite}
-			/> */}
+			/>
 
 			{particles.map((data, i) => (
 				<Bubble key={i} {...data}></Bubble>

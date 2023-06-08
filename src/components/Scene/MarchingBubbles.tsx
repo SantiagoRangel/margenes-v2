@@ -1,8 +1,7 @@
-import { Color, MathUtils, MeshBasicMaterial, SphereGeometry } from 'three'
-import { useRef } from 'react'
+import { Instance, Instances } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { Instances, Instance } from '@react-three/drei'
-import { useControls } from 'leva'
+import { useRef } from 'react'
+import { Color, MathUtils, MeshBasicMaterial, SphereGeometry } from 'three'
 
 const particles = Array.from({ length: 20 }, () => ({
 	factor: MathUtils.randInt(20, 100),
@@ -11,21 +10,6 @@ const particles = Array.from({ length: 20 }, () => ({
 	yFactor: MathUtils.randFloatSpread(80),
 	zFactor: MathUtils.randFloatSpread(10),
 }))
-const params = {
-	color: 0xffffff,
-	transmission: 1,
-	opacity: 1,
-	metalness: 0,
-	roughness: 0,
-	ior: 1.5,
-	thickness: 0.01,
-	specularIntensity: 1,
-	specularColor: new Color('#ffffff'),
-	envMapIntensity: 1,
-	lightIntensity: 100,
-	exposure: 1,
-	depthWrite: false,
-}
 
 export default function MarchingBubbles() {
 	return (
@@ -34,6 +18,8 @@ export default function MarchingBubbles() {
 		</>
 	)
 }
+const sphereGeometry = new SphereGeometry(1, 32, 16)
+const sphereMaterial = new MeshBasicMaterial({ color: '#01b901' })
 
 function Bubbles() {
 	const ref = useRef<any>(null!)
@@ -44,9 +30,6 @@ function Bubbles() {
 			ref.current.rotation.x = MathUtils.damp(ref.current.rotation.x, (-state.mouse.y * Math.PI) / 6, 2.75, delta)
 		}
 	})
-
-	const sphereGeometry = new SphereGeometry(1, 14, 10)
-	const sphereMaterial = new MeshBasicMaterial({ color: '#01b901' })
 
 	return (
 		<Instances

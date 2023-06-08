@@ -4,6 +4,7 @@ import { IcosahedronGeometry, ShaderMaterial } from 'three'
 
 import gsap from 'gsap'
 import { useControls } from 'leva'
+import { mapPos } from '../../utils/utils'
 
 const noise = `
   // GLSL textureless classic 3D noise "cnoise",
@@ -198,9 +199,6 @@ const fragmentShader = `
     gl_FragColor = vec4(color, 1.0);
   }  
 `
-const mapPos = (x: number, in_min: number, in_max: number, out_min: number, out_max: number) => {
-	return ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
-}
 
 interface blobProps {
 	scroll: any
@@ -210,21 +208,7 @@ export default function Blob({ scroll }: blobProps) {
 	const [clicked, setClicked] = useState(false)
 	const blobRef = useRef<any>(null!)
 
-	const updateNoiseStrength = (event: { clientX: any; clientY: any }) => {
-		if (blobRef.current.material) {
-			const mousex = event.clientX
-			const mousey = event.clientY
-			// console.log(mousex - window.innerWidth / 3)
-
-			const newNoiseStrength = mapPos(mousex - window.innerWidth / 3, 0, window.innerWidth / 3, 0, 2.3)
-			blobRef.current.material.uniforms.uNoiseStrength.value = newNoiseStrength
-		}
-	}
-
 	useEffect(() => {
-		// window.addEventListener('scroll', () => {
-		// 	scrollRef.current = window.pageYOffset
-		// })
 		window.addEventListener('mouseup', function (event) {
 			if (clicked) {
 				gsap.to(blobRef.current.material.uniforms.uNoiseStrength, { duration: 1, value: 0.2 })
@@ -311,15 +295,11 @@ export default function Blob({ scroll }: blobProps) {
 		if (blobRef.current.material.uniforms.uTime) blobRef.current.material.uniforms.uTime.value = elapsedTime
 		if (scroll) {
 			if (scroll.current > 0.17 && scroll.current < 0.3333) {
-				// blobRef.current.position.y = lerp(blobRef.current.position.y, -(scroll.current + 0.17) * 150 + 50, 0.9)
 				blobRef.current.position.y = mapPos(scroll.current, 0.166666, 0.333333, 20, 0.5)
+			} else if (scroll.current > 0.66666666666 && scroll.current < 0.83333333) {
+				blobRef.current.position.x = mapPos(scroll.current, 0.6666666, 0.83333333, 6, 30)
 			}
 		}
-
-		// const offset = data.range(0, 1 / 3)
-		// blobRef.current.position.y = scroll * 10
-		// const offset2 = data.range(1 / 3, 1 / 3)
-		// blobRef.current.position.x = offset2 * 5
 	})
 	return (
 		<>

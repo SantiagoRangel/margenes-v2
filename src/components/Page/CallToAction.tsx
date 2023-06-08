@@ -6,7 +6,10 @@ export default function CallToAction() {
 	const [copy] = useAtom(copyAtom)
 	const [lang] = useAtom(langAtom)
 	return (
-		<CallToActionDiv className='callToDiv'>
+		<CallToActionDiv
+			className='callToDiv'
+			onClick={() => window.open('https://calendly.com/margeneslabs/30min', '_blank')}
+		>
 			<CallToActionTitle>{copy[lang].callToAction.title}</CallToActionTitle>
 			<CallToActionText>{copy[lang].callToAction.text}</CallToActionText>
 		</CallToActionDiv>

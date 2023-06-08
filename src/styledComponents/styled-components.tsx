@@ -33,6 +33,7 @@ const MintHeader = styled.h1`
 		font-size: 3.5rem;
 		width: 100%;
 		line-height: 55px;
+		text-align: center;
 	}
 `
 
@@ -45,6 +46,7 @@ const Minth2 = styled.h2`
 	margin-top: -2rem;
 	@media only screen and (max-width: 768px) {
 		line-height: 1.8rem;
+		text-align: center;
 	}
 `
 
@@ -57,6 +59,7 @@ const MintContent = styled.p`
 	line-height: 24px;
 	letter-spacing: -1px;
 	@media only screen and (max-width: 768px) {
+		text-align: center;
 	}
 `
 
@@ -67,11 +70,13 @@ const MintCTA = styled.p`
 	font-weight: 300;
 	margin-top: 1rem;
 	text-decoration: underline;
-	max-width: 110px;
+	max-width: 250px;
+	pointer-events: auto;
 	&:hover {
 		cursor: pointer;
 	}
 	@media only screen and (max-width: 768px) {
+		text-align: center;
 	}
 `
 
@@ -142,7 +147,7 @@ const ServiceH2 = styled.h2`
 	font-weight: 600;
 	line-height: 40px;
 	max-width: 20rem;
-	text-align: center;
+	text-align: left;
 	@media only screen and (max-width: 768px) {
 		font-size: 1.6rem;
 	}

@@ -17,8 +17,10 @@ const MainDiv = styled.section`
 	pointer-events: none;
 	@media only screen and (max-width: 768px) {
 		margin: 0;
-		padding-left: 1.5rem;
-		padding-right: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0;
 		width: 100vw;
 	}
 `

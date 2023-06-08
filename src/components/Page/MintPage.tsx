@@ -2,6 +2,11 @@ import { useAtom } from 'jotai'
 import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
 import { MintContent, MintCTA, Minth2, MintHeader } from '../../styledComponents/styled-components'
+import { Dispatch, SetStateAction } from 'react'
+import { ethers, BigNumber } from 'ethers'
+import mglPass from '../../MglPass.json'
+
+const mglPassAddress = '0x1FBf18b7d8c9B5fe8b181289D014Bb3DD2631010'
 
 const MainDiv = styled.section`
 	display: flex;
@@ -15,14 +20,54 @@ const MainDiv = styled.section`
 	position: absolute;
 	@media only screen and (max-width: 768px) {
 		margin: 0;
-		padding-left: 1.5rem;
-		padding-right: 1rem;
+		margin-left: 1rem;
+		padding: 0;
 		width: 90%;
 	}
 `
-export default function MintPage() {
+
+interface MintPageProps {
+	accounts: string[]
+	setAccounts: Dispatch<SetStateAction<string[]>>
+	scrolling: any
+}
+
+export default function MintPage({ accounts, setAccounts, scrolling }: MintPageProps) {
 	const [copy] = useAtom(copyAtom)
 	const [lang] = useAtom(langAtom)
+
+	const isConnected = Boolean(accounts[0])
+
+	const handleMint = async () => {
+		if (!window.ethereum) return
+		const provider = new ethers.providers.Web3Provider(window.ethereum)
+		const signer = provider.getSigner()
+		const contract = new ethers.Contract(mglPassAddress, mglPass.abi, signer)
+		try {
+			const response = await contract.mint({
+				value: ethers.utils.parseEther((0.001).toString()),
+			})
+
+			console.log(response)
+		} catch (err: any) {
+			console.log(err)
+			if (err.data) {
+				let errorReason = ethers.utils.toUtf8String('0x' + err.data.message.substring(138))
+				console.log(errorReason)
+			} else {
+				console.log(err)
+			}
+		}
+	}
+
+	const connectAccount = async () => {
+		if (window.ethereum) {
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+			console.log(accounts)
+			setAccounts(accounts)
+		}
+	}
+
 	return (
 		<MainDiv className='main mintPage' id='mint-div'>
 			<div className='mintPage-fade'>
@@ -32,7 +77,21 @@ export default function MintPage() {
 					<MintContent key={i}>{text}</MintContent>
 				))}
 
-				<MintCTA>{copy[lang].mint.cta}</MintCTA>
+				{isConnected ? (
+					<MintCTA onClick={handleMint}>{copy[lang].mint.cta}</MintCTA>
+				) : (
+					<MintCTA
+						onClick={() => {
+							scrolling.disable()
+							connectAccount()
+							setTimeout(() => {
+								scrolling.enable()
+							}, 200)
+						}}
+					>
+						Connect wallet to mint
+					</MintCTA>
+				)}
 			</div>
 		</MainDiv>
 	)

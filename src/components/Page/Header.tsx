@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import React, { useLayoutEffect } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useLayoutEffect } from 'react'
 import styled from 'styled-components'
 import { copyAtom, langAtom } from '../../Atoms/atoms'
 import gsap from 'gsap'
@@ -7,18 +7,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-// ScrollTrigger.normalizeScroll(true)
+
 const HeaderDiv = styled.div`
 	padding-top: 10px;
 	font-size: 15pt;
 	position: fixed;
-	z-index: 999;
+	z-index: 99;
 	top: 0;
 	left: 0;
 	right: 0;
 	position: fixed;
 	@media only screen and (max-width: 768px) {
-		display: none;
 	}
 `
 const Section = styled.div`
@@ -40,48 +39,39 @@ const Flexdiv = styled.div`
 	display: flex;
 	justify-content: space-between;
 `
+interface HeaderProps {
+	accounts: string[]
+	setAccounts: Dispatch<SetStateAction<string[]>>
+	setScrolling: any
+	scrolling: any
+}
 
-export default function Header({ goToSectionHeader }: { goToSectionHeader: (section: string) => void }) {
+export default function Header({ accounts, setAccounts, setScrolling, scrolling }: HeaderProps) {
 	const [lang, setLang] = useAtom(langAtom)
 	const [copy] = useAtom(copyAtom)
+
+	const isConnected = Boolean(accounts[0])
+
+	const abbreviateAddress = (address: string) => {
+		return `${address.slice(0, 6)}...${address.slice(-4)}`
+	}
 
 	return (
 		<HeaderDiv>
 			<Flexdiv>
 				<div>
-					<DivTitle
-						onClick={() => {
-							goToSectionHeader('home-div')
-						}}
-					>
-						MGL
-					</DivTitle>
+					<DivTitle>MGL</DivTitle>
 				</div>
 				<Section>
+					{isConnected && <DivTitle> {abbreviateAddress(accounts[0])}</DivTitle>}
+
 					<DivTitle
 						onClick={() => {
-							goToSectionHeader('services-div')
-						}}
-					>
-						{copy[lang].header.services}
-					</DivTitle>
-					<DivTitle
-						onClick={() => {
-							goToSectionHeader('mint-div')
-						}}
-					>
-						{copy[lang].header.wallet}
-					</DivTitle>
-					<DivTitle
-						onClick={() => {
-							goToSectionHeader('contact-div')
-						}}
-					>
-						{copy[lang].header.contact}
-					</DivTitle>
-					<DivTitle
-						onClick={() => {
+							scrolling.disable()
 							lang === 'es' ? setLang('en') : setLang('es')
+							setTimeout(() => {
+								scrolling.enable()
+							}, 100)
 						}}
 					>
 						{copy[lang].header.language}

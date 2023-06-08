@@ -3,5 +3,6 @@ import data from '../copy.json'
 
 export const copyAtom = atom<any>(data);
 export const langAtom = atom<string>('es');
+export const scrollingAtom = atom<boolean>(false);
 
 

@@ -36,7 +36,8 @@ const Icon = styled.span`
 		text-align: center;
 	}
 	@media only screen and (max-width: 768px) {
-		top: 90vh;
+		top: 95vh;
+		margin-left: -35px;
 	}
 `
 
