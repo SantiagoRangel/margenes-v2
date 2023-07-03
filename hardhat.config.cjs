@@ -7,11 +7,11 @@ module.exports = {
 	networks: {
 		mainnet: {
 			url: process.env.REACT_APP_MAINNET_RPC_CALL_URL,
-			accounts: [process.env.REACT_APP_PRIVATE_KEY],
+			accounts: [process.env.REACT_APP_PRIVATE_KEY_MGL],
 		},
 		sepolia: {
 			url: process.env.REACT_APP_SEPOLIA_RPC_CALL_URL,
-			accounts: [process.env.REACT_APP_PRIVATE_KEY],
+			accounts: [process.env.REACT_APP_PRIVATE_KEY_MGL],
 		},
 	},
 	etherscan: {

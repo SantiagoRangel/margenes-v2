@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { ethers, BigNumber } from 'ethers'
 import mglPass from '../../MglPass.json'
 
-const mglPassAddress = '0x1FBf18b7d8c9B5fe8b181289D014Bb3DD2631010'
+const mglPassAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
 const MainDiv = styled.section`
 	display: flex;
@@ -45,7 +45,7 @@ export default function MintPage({ accounts, setAccounts, scrolling }: MintPageP
 		const contract = new ethers.Contract(mglPassAddress, mglPass.abi, signer)
 		try {
 			const response = await contract.mint({
-				value: ethers.utils.parseEther((0.001).toString()),
+				value: ethers.utils.parseEther((1).toString()),
 			})
 
 			console.log(response)
